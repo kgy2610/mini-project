@@ -26,9 +26,9 @@ uvicorn main:app --reload
 
 # 🧱 WBS (Work Breakdown Structure)
 1. 프로젝트 초기 설정
-   - [ ] 레포지토리 생성
-   - [ ] 프로젝트 주제 확정
-   - [ ] WBS작성
+   - [x] 레포지토리 생성
+   - [x] 프로젝트 주제 확정
+   - [x] WBS작성
    - [ ] 와이어프레임 작성 (채팅 UI 스케치)
 
 2. 백엔드 환경 설정
