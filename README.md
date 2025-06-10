@@ -39,4 +39,4 @@ uvicorn main:app --reload
 5. 기본 구조 설계
    - [ ] API 엔드포인트 설계
    - [ ] 스키마 설계(Pydantic)
-   - [ ] UI/UX 구조 계
+   - [ ] UI/UX 구조 계획
