@@ -29,7 +29,8 @@ uvicorn main:app --reload
    - [x] 레포지토리 생성
    - [x] 프로젝트 주제 확정
    - [x] WBS작성
-   - [ ] 와이어프레임 작성 (채팅 UI 스케치)
+   - [x] 와이어프레임 작성 (채팅 UI 스케치)
+   - <https://www.figma.com/design/IDBNwx6rTty0A20fEZEYgN/Untitled?node-id=0-1&t=wrVE97JsgdbGolaA-1>
 
 2. 백엔드 환경 설정
    - [ ] Python 가상환경 생성 및 활성화
