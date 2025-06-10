@@ -13,7 +13,7 @@
 |post|/login|로그인|
 |post|/chat|사용자의 질문 전송 및 응답 받기|
 |get|/history/{username}|유저별 질문/답변 기록 조회|
---
+
 # ⚙️ 실행 방법
 ```
 uvicorn main:app --reload
