@@ -110,24 +110,24 @@ GET /history/user01
 > - 'answer': OpenAI/딕서너리 기반 응답 텍스트
 
 # 🧱 WBS (Work Breakdown Structure)
-1. 프로젝트 초기 설정
+1. 프로젝트 초기 설정 (25.06.10)
    - [x] 레포지토리 생성
    - [x] 프로젝트 주제 확정
    - [x] WBS작성
    - [x] 와이어프레임 작성 (채팅 UI 스케치)
    - <https://www.figma.com/design/IDBNwx6rTty0A20fEZEYgN/Untitled?node-id=0-1&t=wrVE97JsgdbGolaA-1>
 
-2. 백엔드 환경 설정
+2. 백엔드 환경 설정 (25.06.10)
    - [x] Python 가상환경 생성 및 활성화
    - [x] FastAPI 기본 구조 세팅
    - [x] CORS 설정 (프론트와 연결 위한 허용 설정)
 
          
-3. 프론트엔드 초기 설정
+3. 프론트엔드 초기 설정 (25.06.10)
    - [x] 템플릿 폴더 구조 생성
    - [x] 기본 HTML, CSS 파일 생성
       
-5. 기본 구조 설계
+5. 기본 구조 설계 (25.06.10)
    - [x] API 엔드포인트 설계
-   - [ ] 스키마 설계(Pydantic)
-   - [ ] UI/UX 구조 계획
+   - [x] 스키마 설계(Pydantic)
+   - [x] UI/UX 구조 계획
