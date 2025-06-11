@@ -40,10 +40,39 @@ body{
 /* 채팅창 */
 .chat-window{
     /* background-color: antiquewhite; */
-    width: 100%; height: 100%;
-    /* flex: 1; */
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
     padding: 10px;
     overflow-y: auto;
+    height: 100%;
+}
+.chat-message{
+    display: inline-block;
+    width: fit-content;
+    max-width: 70%;
+    margin: 5px;
+    padding: 10px 14px;
+    border-radius: 16px;
+    line-height: 1.4;
+    word-break: break-word;
+}
+.chat-message.user{
+    background-color: snow;
+    text-align: right;
+    border: 2px solid #FF9E00;
+    align-self: flex-end;
+}
+.chat-message.gpt{
+    color: #fff;
+    background-color: #B78B6C;
+    line-height: 1.8;
+    text-align: left;
+    border: 2px solid #FF9E00;
+    align-self: flex-start;
+}
+.chat-message.gpt strong{
+    font-size: 18px;
 }
 
 /* 푸터 */

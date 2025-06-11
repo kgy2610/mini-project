@@ -6,6 +6,9 @@ from pydantic import BaseModel
 from typing import Optional, List
 from fastapi.middleware.cors import CORSMiddleware
 
+# 별도의 견종 정보 py 파일
+from dogInfo import generate_answer
+
 app = FastAPI()
 
 # CORS 설정정
@@ -40,16 +43,20 @@ def chat(req: ChatRequest):
     if not req.question.endswith("에 대해 알려줘"):
         raise HTTPException(status_code=400, detail="질문은 '(견종)에 대해 알려줘' 형식으로 입력해야 합니다.")
     
-    try:
-        response = requests.post(
-            CHATGPT_PROXY_URL,
-            json={"question": req.question}
-        )
-        data = response.json()
+    bread = req.question.replace("에 대해 알려줘", "").strip()
+    answer = generate_answer(bread)
+    return {"question": req.question, "answer": answer}
 
-        return{
-            "question": req.question,
-            "answer": data.get("answer", "응답을 불러오지 못했습니다.")
-        }
-    except Exception as e:
-        raise HTTPException(status_code=500, detail="CHATGPT 호출 실패 " + str(e))
+    # try:
+    #     response = requests.post(
+    #         CHATGPT_PROXY_URL,
+    #         json={"question": req.question}
+    #     )
+    #     data = response.json()
+
+    #     return{
+    #         "question": req.question,
+    #         "answer": data.get("answer", "응답을 불러오지 못했습니다.")
+    #     }
+    # except Exception as e:
+    #     raise HTTPException(status_code=500, detail="CHATGPT 호출 실패 " + str(e))
