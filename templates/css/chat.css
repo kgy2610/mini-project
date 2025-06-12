@@ -21,20 +21,22 @@ body{
 }
 .logo > img{
     width: 160px; height: 65px;
+    margin-left: 150px;
 }
-.chat-history{
-    background-color: #B78B6C;
+.logout{
+    color: #B78B6C;
     width: 200px; height: 50px;
+    margin-top: 20px;
     line-height: 50px;
     font-size: 20px;
-    color: #fff;
     font-weight: bold;
     text-align: center;
+    text-decoration: underline;
     border-radius: 30px;
     cursor: pointer;
 }
-.chat-history:hover{
-    background-color: #734D32;
+.logout:hover{
+    color: #734D32;
 }
 
 /* 채팅창 */
@@ -75,6 +77,21 @@ body{
     font-size: 18px;
 }
 
+::-webkit-scrollbar{
+    width: 10px;
+}
+::-webkit-scrollbar-track{
+    background-color: #B78B6C;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: #734D32;
+    border-radius: 20px;
+}
+
+
+
 /* 푸터 */
 .chat-input-area{
     width: 100%; height: fit-content;
@@ -89,6 +106,7 @@ body{
     flex: 1;
     padding-left: 20px;
     font-size: 20px;
+    text-align: left;
     border: 1px solid #B78B6C;
     border-radius: 16px;
 }
