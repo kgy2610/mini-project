@@ -1,4 +1,4 @@
-.login-container{
+.reg-container{
     width: 100%; height: 100vh;
     display: flex;
     flex-direction: column;
@@ -6,19 +6,19 @@
     justify-content: center;
 }
 
-.login-logo img{
+.reg-logo img{
     width: 400px;
     margin-bottom: 20px;
 }
 
-.login-box{
+.reg-box{
     width: 600px;
     border: 1px solid #B78B6C;
     border-radius: 8px;
     padding: 30px;
 }
 
-.login-box h2{
+.reg-box h2{
     width: fit-content;
     color: #734D32;
     margin-bottom: 20px;
@@ -34,7 +34,7 @@ form{
     gap: 15px;
 }
 
-.login-row{
+.reg-row{
     width: fit-content;
     display: flex;
     justify-content: space-between;
@@ -42,13 +42,13 @@ form{
     color: #734D32;
 }
 
-.login-box label{
+.reg-box label{
     width: 80px;
     text-align: right;
     font-size: 18px;
 }
 
-.login-box input{
+.reg-box input{
     width: 350px;
     padding: 8px 20px;
     margin-left: 20px;
@@ -58,17 +58,17 @@ form{
     border: none;
 }
 
-.login-box input:focus{
+.reg-box input:focus{
     outline: none;
 }
 
-.login-submit{
+.reg-submit{
     width: 300px;
     margin: 0 auto;
     display: flex;
 }
 
-.login-box button{
+.reg-box button{
     margin: 0px;
     padding: 10px;
     background-color: #B78B6C;
@@ -78,34 +78,19 @@ form{
     cursor: pointer;
     
 }
-.login-box button:hover{
+.reg-box button:hover{
     background-color: #734D32;
 }
 
-.find{
-    margin-top: 15px;
-}
-
-.find a{
-    font-weight: bold;
-    text-decoration: underline;
-    font-size: 18px;
-}
-
 .register{
+    color: #B78B6C;
+    text-decoration: underline;
     margin-top: 10px;
-    display: flex;
+    cursor: pointer;
 }
 
-.register p{
-    color: darkgray;
-    text-decoration: none;
-}
 .register a{
-    font-weight: bold;
     color: #B78B6C;
-    text-decoration: none;
-    cursor: pointer;
 }
 
 .register a:hover{

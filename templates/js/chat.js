@@ -17,8 +17,10 @@ async function sendMessage() {
     console.log("입력된 질문 : ", question);
     if (!question) return;
 
-    // 테스트용 유저 코드
-    const user = "user01";
+    // 챗봇이 메세지를 보내는 중 입력창 및 버튼 비활성화
+    input.disabled = true;
+    button.disabled = true;
+
     // 사용자 질문 출력
     const userMsg = document.createElement("div");
     userMsg.className = "chat-message user";
@@ -28,7 +30,7 @@ async function sendMessage() {
     // 로딩 말풍선
     const loadingMsg = document.createElement("div");
     loadingMsg.className = "chat-message gpt";
-    loadingMsg.textContent = "GPT가 답변을 보내고 있습니다.";
+    loadingMsg.textContent = "챗봇이 답변을 보내고 있습니다.";
     chatWindow.appendChild(loadingMsg);
     chatWindow.scrollTop = chatWindow.scrollHeight;
 
@@ -36,10 +38,20 @@ async function sendMessage() {
         const response = await fetch("http://localhost:8000/chat", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ user, question })
+            credentials: "include",
+            body: JSON.stringify({ question })
         });
 
         const data = await response.json();
+
+        if(!response.ok){
+            alert(data.detail || "에러가 발생했습니다.");
+            chatWindow.removeChild(loadingMsg);
+            // 채팅창 활성화
+            input.disabled = false;
+            button.disabled = false;
+            return;
+        }
 
         // gtp 응답 출력(질문 전송 3초 후)
         setTimeout(() => {
@@ -51,9 +63,17 @@ async function sendMessage() {
             gptMsg.innerHTML = data.answer.replace(/\n/g, "<br>");
             chatWindow.appendChild(gptMsg);
             chatWindow.scrollTop = chatWindow.scrollHeight;
+
+            // 챗봇이 메세지를 보낸 후 채팅 입력 활성화
+            input.disabled = false;
+            input.disabled = false;
         }, 3000);
     } catch (err) {
         alert("에러가 발생했습니다. " + err);
+        chatWindow.removeChild(loadingMsg);
+        // 오류 발생시 채팅 입력 활성화
+        input.disabled = false;
+        button.disabled = false;
     }
 
     // 메세지 전송시 입력창 초기화
