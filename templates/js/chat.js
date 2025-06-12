@@ -125,7 +125,7 @@ async function sendMessage() {
 
             // 챗봇이 메세지를 보낸 후 채팅 입력 활성화
             input.disabled = false;
-            input.disabled = false;
+            button.disabled = false;
         }, 3000);
     } catch (err) {
         alert("에러가 발생했습니다. " + err);
