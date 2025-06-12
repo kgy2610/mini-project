@@ -112,29 +112,56 @@ def chat(req: ChatRequest,user: Optional[str] = Cookie(default=None)):
         raise HTTPException(status_code=401, detail="로그인 후 질문해주세요.")
     
     if not re.match(r"^.+에 대해 알려줘$", req.question):
-        raise HTTPException(status_code=400, detail="질문은 '(견종)에 대해 알려줘' 형식으로 입력해야 합니다.")
-    
-    bread = req.question.replace("에 대해 알려줘", "").strip()
-    answer = generate_answer(bread)
+        answer = "질문은 '(견종)에 대해 알려줘' 형식으로 입력해주세요."
+    else:
+        bread = req.question.replace("에 대해 알려줘", "").strip()
+        answer = str(generate_answer(bread))
 
-    # # 채팅 기록 저장
-    # folder = "user-chatHistory"
-    # os.makedirs(folder, exist_ok=True)
-    # filepath = os.path.join(folder, f"{user}.json")
+    # 채팅 기록 저장
+    folder = "user-chatHistory"
+    os.makedirs(folder, exist_ok=True)
+    filepatch = os.path.join(folder, f"{user}.json")
 
-    # # 기존 기록 불러오기
-    # if os.path.exists(filepath):
-    #     with open(filepath, "r", encoding="utf-8") as f:
-    #         chat_data = []
+    # 기존 기록 불러오기(없으면 빈 리스트)
+    if os.path.exists(filepatch):
+        with open(filepatch, "r", encoding="utf-8") as f:
+            chat_data = json.load(f)
+    else:
+        chat_data = []
 
-    # # 새로운 질문/답변 추가
-    # chat_data.append({
-    #     "question": req.question,
-    #     "answer": answer
-    # })
+    # 새로운 질문/답변 추가
+    chat_data.append({
+        "question": req.question,
+        "answer": answer
+    })
 
-    # # 파일 저장
-    # with open(filepath, "w", encoding="utf-8") as f:
-    #     json.dump(chat_data, f, ensure_ascii=False, indent=2)
+    # 파일 저장
+    with open(filepatch, "w", encoding="utf-8") as f:
+        json.dump(chat_data, f, ensure_ascii=False, indent=2)
 
+    print("응답 준비: ", {"question": req.question, "answer": answer})
     return {"question": req.question, "answer": answer}
+
+# /history 엔드포인트
+@app.get("/history")
+def history(user: Optional[str] = Cookie(default=None)):
+    if not user:
+        raise HTTPException(status_code=401, detail="로그인되지 않았습니다.")
+    
+    folder = "user-chatHistory"
+    filepatch = os.path.join(folder, f"{user}.json")
+
+    if not os.path.exists(filepatch):
+        return {"history": []} # 채팅 이력이 없을 경우
+    
+    with open(filepatch, "r", encoding="utf-8") as f:
+        chat_data = json.load(f)
+
+    return {"history": chat_data}
+
+# /logout 엔드포인트
+@app.post("/logout")
+def logout():
+    response = JSONResponse(content={"message": "로그아웃 완료"})
+    response.delete_cookie("user")
+    return response
