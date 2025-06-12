@@ -5,13 +5,12 @@ from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 from typing import Optional, List
 from fastapi.middleware.cors import CORSMiddleware
-
 # 별도의 견종 정보 py 파일
 from dogInfo import generate_answer
 
 app = FastAPI()
 
-# CORS 설정정
+# CORS 설정
 origins = [
     "http://localhost:5500",  # html Live Server
     "http://127.0.0.1:5500"

@@ -26,19 +26,11 @@ async function sendMessage() {
     chatWindow.appendChild(userMsg);
 
     // 로딩 말풍선
-    const lodingMsg = document.createElement("div");
-    lodingMsg.className = "chat-message gpt";
-    lodingMsg.textContent = "GPT가 답변을 보내고 있습니다.";
-    chatWindow.appendChild(lodingMsg);
+    const loadingMsg = document.createElement("div");
+    loadingMsg.className = "chat-message gpt";
+    loadingMsg.textContent = "GPT가 답변을 보내고 있습니다.";
+    chatWindow.appendChild(loadingMsg);
     chatWindow.scrollTop = chatWindow.scrollHeight;
-
-    // 로딩 애니메이션
-    let dotCount = 0;
-    const dotInterval = setInterval(() => {
-        // > . > .. > ... > > . 반복
-        dotCount = (dotCount + 1) % 4;
-        lodingMsg.textContent = "GPT가 답변을 보내고 있습니다" + ".".repeat(dotCount);
-    }, 0);
 
     try {
         const response = await fetch("http://localhost:8000/chat", {
@@ -49,18 +41,17 @@ async function sendMessage() {
 
         const data = await response.json();
 
-        // 로딩/애니메이션 중단
-        clearInterval(dotInterval);
-        chatWindow.removeChild(lodingMsg);
-
         // gtp 응답 출력(질문 전송 3초 후)
         setTimeout(() => {
+            // 로딩 말풍선 출력 중단
+            chatWindow.removeChild(loadingMsg)
+
             const gptMsg = document.createElement("div");
             gptMsg.className = "chat-message gpt";
             gptMsg.innerHTML = data.answer.replace(/\n/g, "<br>");
             chatWindow.appendChild(gptMsg);
             chatWindow.scrollTop = chatWindow.scrollHeight;
-        }, 0);
+        }, 3000);
     } catch (err) {
         alert("에러가 발생했습니다. " + err);
     }
